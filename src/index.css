@@ -1,0 +1,105 @@
+/* Breakpoints -> 540px 720px 960px 1140px */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400i&display=swap');
+/* Defaults */
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+}
+
+a {
+  font-family: 'Open Sans', sans-serif;
+  color: #266b94;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-block {
+  display: block;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.mb-5 {
+  margin-bottom: 50px;
+}
+
+.searchInput {
+  outline: none;
+  padding: 15px 10px;
+  max-width: 360px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: 160ms ease-in-out;
+}
+
+.searchInput:hover, .searchInput:focus, .searchInput:active {
+  border-color: #000;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

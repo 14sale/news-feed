@@ -1,0 +1,20 @@
+.mainLayout {
+  display: flex;
+  height: 100%;
+}
+
+.mainWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentLayout {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  background-color: #e6e6e6;
+  margin-top: 50px;
+}
