@@ -85,6 +85,7 @@ const TopNewsByCategories = () => {
             </section>
             <section>
               {loading && <div className={styles.loaderWrapper}> <Loader /> </div>}
+              {!loading && !sliders && <UnableToLoadMessage />}
               {!loading && sliders}
             </section>
           </ContentWrapepr>

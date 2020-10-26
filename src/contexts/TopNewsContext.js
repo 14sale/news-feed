@@ -16,7 +16,6 @@ const TopNewsContextProvider = ({ children }) => {
       fetch(url)
         .then(newsRaw => newsRaw.json())
         .then(news => resolve(news.articles))
-        .catch(error => { throw new Error(error) })
     })
 
     const dataFromLocalStorage = JSON.parse(localStorage.getItem(`topNews-${activeCountry.code}`))
@@ -28,7 +27,10 @@ const TopNewsContextProvider = ({ children }) => {
         setTopNews(news)
         news && localStorage.setItem(`topNews-${activeCountry.code}`, JSON.stringify(news))
         setLoading(false)
-      })
+      }).catch(
+        setTopNews(null),
+        setLoading(false),
+      )
     }
   }, [activeCountry])
 

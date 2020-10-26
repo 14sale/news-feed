@@ -9,22 +9,28 @@ const NewsByCategoryContextProvider = ({ children }) => {
     {
       name: 'Business',
       code: 'business',
-    }, {
+    },
+    {
       name: 'Entertainment',
       code: 'entertainment',
-    }, {
+    },
+    {
       name: 'General',
       code: 'general',
-    }, {
+    },
+    {
       name: 'Health',
       code: 'health',
-    }, {
+    },
+    {
       name: 'Science',
       code: 'science',
-    }, {
+    },
+    {
       name: 'Sports',
       code: 'sports',
-    }, {
+    },
+    {
       name: 'Technology',
       code: 'technology',
     },
@@ -36,38 +42,44 @@ const NewsByCategoryContextProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true)
     const fetchNews = async () => Promise.all(
-      categories.map(async category => new Promise(resolve => {
-        const url = `${apiHost}top-headlines?country=${activeCountry.code}&category=${category.code}&apiKey=${apiKey}&pageSize=9`
-        fetch(url)
-          .then(newsRaw => newsRaw.json())
-          .then(news => resolve({ ...category, articles: news.articles }))
-          .catch(error => { throw new Error(error) })
-      })),
+      categories.map(
+        async category => new Promise(resolve => {
+          const url = `${apiHost}top-headlines?country=${activeCountry.code}&category=${category.code}&apiKey=${apiKey}&pageSize=9`
+          fetch(url)
+            .then(newsRaw => newsRaw.json())
+            .then(news => resolve({ ...category, articles: news.articles }))
+        }),
+      ),
     )
 
-    const dataFromLocalStorage = JSON.parse(localStorage.getItem(`newsByCategory-${activeCountry.code}`))
+    const dataFromLocalStorage = JSON.parse(
+      localStorage.getItem(`newsByCategory-${activeCountry.code}`),
+    )
     if (dataFromLocalStorage) {
       setNewsByCategory(dataFromLocalStorage)
       setLoading(false)
     } else {
-      fetchNews().then(news => {
-        setNewsByCategory(news)
-        localStorage.setItem(`newsByCategory-${activeCountry.code}`, JSON.stringify(news))
-        setLoading(false)
-      })
+      fetchNews()
+        .then(news => {
+          setNewsByCategory(news)
+          localStorage.setItem(`newsByCategory-${activeCountry.code}`, JSON.stringify(news))
+          setLoading(false)
+        })
+        .catch(setNewsByCategory(null), setLoading(false))
     }
   }, [activeCountry, categories])
 
   return (
-    <NewsByCategoryContext.Provider value={{
-      loading,
-      newsByCategory,
-      setNewsByCategory,
-      articleForPreview,
-      setArticleForPreview,
-      categories,
-      setCategories,
-    }}
+    <NewsByCategoryContext.Provider
+      value={{
+        loading,
+        newsByCategory,
+        setNewsByCategory,
+        articleForPreview,
+        setArticleForPreview,
+        categories,
+        setCategories,
+      }}
     >
       {children}
     </NewsByCategoryContext.Provider>
