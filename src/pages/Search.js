@@ -21,7 +21,7 @@ const Search = () => {
     const results = []
 
     if (value.length > 3) {
-      topNews.map(item => {
+      topNews && topNews.map(item => {
         if (item.description && item.description.indexOf(value) !== -1) {
           results.push(item)
         }
@@ -54,6 +54,10 @@ const Search = () => {
     </>
   )
 
+  const UnableToLoadMessage = () => (
+    <p className="text-center">The service is currently unable to load news, please try again later.</p>
+  )
+
   return (
     <>
       {articleForPreview
@@ -75,6 +79,7 @@ const Search = () => {
           )}
 
         {loading && <Loader />}
+        {!loading && !topNews && <UnableToLoadMessage />}
         {!loading && !searchResults && <NotFoundTemplate />}
         {!loading
           && !articleForPreview
