@@ -40,8 +40,8 @@ function TopNews() {
       toReturn = (
         <NewsCard
           key={index}
-          article={article}
           articlePreview={articlePreviewHandler}
+          {...article}
         />
       )
     }
@@ -59,7 +59,7 @@ function TopNews() {
         articleForPreview
         && (
         <Article
-          article={articleForPreview}
+          {...articleForPreview}
           backFromPreview={backFromArticlePreview}
           backFromPreviewText="Back to top news"
         />

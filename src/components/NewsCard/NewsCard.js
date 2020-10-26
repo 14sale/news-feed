@@ -11,25 +11,26 @@ const NewsCard = props => {
   }
 
   const {
-    article: { urlToImage },
-    article: { title },
-    article: { description },
-    articlePreview,
+    urlToImage,
+    title,
+    description,
   } = props
+
+  const { articlePreview, ...rest } = props
 
   return (
     <div className={styles.card}>
-      <div className={styles.img} onClick={e => articlePreview(e, props.article)}>
+      <div className={styles.img} onClick={e => articlePreview(e, rest)}>
         {
           urlToImage
             ? (<img src={urlToImage} alt={title} onError={hideMe} />)
             : ''
         }
       </div>
-      <h3><Link to="/" onClick={e => props.articlePreview(e, props.article)}>{title}</Link></h3>
+      <h3><Link to="/" onClick={e => props.articlePreview(e, rest)}>{title}</Link></h3>
       <p>{description}</p>
 
-      <Link to="/" className={styles.readMore} onClick={e => props.articlePreview(e, props.article)}>Read more</Link>
+      <Link to="/" className={styles.readMore} onClick={e => props.articlePreview(e, rest)}>Read more</Link>
     </div>
   )
 }

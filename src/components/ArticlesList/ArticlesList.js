@@ -6,8 +6,8 @@ const ArticlesList = ({ articles, articlePreviewHandler }) => {
   const newsCards = articles.map((article, i) => (
     <NewsCard
       key={i}
-      article={article}
       articlePreview={articlePreviewHandler}
+      {...article}
     />
   ))
 

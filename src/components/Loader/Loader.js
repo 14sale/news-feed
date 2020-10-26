@@ -3,7 +3,7 @@ import styles from './Loader.module.css'
 
 function Loader() {
   return (
-    <div className="loader-wrapper">
+    <div className={styles.wrapper}>
       <div className={`loader ${styles.loader}`}>
         <div />
         <div />

@@ -50,6 +50,7 @@ const Category = ({ location }) => {
 
   useEffect(() => {
     resolveData()
+    window.scrollTo(0, 0)
 
     return () => {
       articleForPreview && backFromArticlePreview()
@@ -61,7 +62,7 @@ const Category = ({ location }) => {
       { articleForPreview
         && (
           <Article
-            article={articleForPreview}
+            {...articleForPreview}
             backFromPreview={backFromArticlePreview}
             backFromPreviewText={`Back to ${news.code} news`}
           />

@@ -5,12 +5,12 @@ import { dateFormat } from '../../utils/HelperFunctions'
 
 const Article = props => {
   const {
-    article: { urlToImage },
-    article: { title },
-    article: { publishedAt },
-    article: { published = dateFormat(publishedAt) },
-    article: { author },
-    article: { content },
+    urlToImage,
+    title,
+    publishedAt,
+    published = dateFormat(publishedAt),
+    author,
+    content,
     backFromPreview,
     backFromPreviewText,
   } = props
@@ -22,7 +22,7 @@ const Article = props => {
   return (
     <ContentWrapepr>
       <button type="button" className={styles.backToList} onClick={backFromPreview}>
-        <i className="arrow left" />
+        <i className={`${styles.arrow} ${styles.left}`} />
         {backFromPreviewText || 'Back'}
       </button>
 

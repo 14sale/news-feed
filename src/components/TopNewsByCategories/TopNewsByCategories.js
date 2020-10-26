@@ -49,8 +49,8 @@ const TopNewsByCategories = () => {
       && category.articles.slice(0, 5).map((article, i) => (
         <NewsCard
           key={i}
-          article={article}
           articlePreview={articlePreviewHandler}
+          {...article}
         />
       ))
 
@@ -72,7 +72,7 @@ const TopNewsByCategories = () => {
       { articleForPreview
         && (
           <Article
-            article={articleForPreview}
+            {...articleForPreview}
             backFromPreview={backFromArticlePreview}
             backFromPreviewText="Back to categories"
           />
