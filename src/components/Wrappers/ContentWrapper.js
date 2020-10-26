@@ -1,10 +1,10 @@
 import React from 'react'
 import Styles from './ContentWrapper.module.css'
 
-function ContentWrapper(props) {
+function ContentWrapper({children}) {
   return (
     <div className={Styles.wrapper}>
-      {props.children}
+      {children}
     </div>
   )
 }

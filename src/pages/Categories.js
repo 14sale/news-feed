@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 import TopNewsByCategories from '../components/TopNewsByCategories/TopNewsByCategories'
 
-const Categories = () => {
-  return (
-    <TopNewsByCategories />
+const Categories = () => (
+  <TopNewsByCategories />
 
-  )
-}
+)
 
-export default Categories;
+export default Categories

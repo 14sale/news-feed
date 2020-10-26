@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react'
 import ContentWrapepr from '../components/Wrappers/ContentWrapper'
 import ArticlesList from '../components/ArticlesList/ArticlesList'
 import Loader from '../components/Loader/Loader'
@@ -14,14 +14,14 @@ const Search = () => {
   const [articleForPreview, setArticleForPreview] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const searchHandler = (e) => {
+  const searchHandler = e => {
     setLoading(true)
 
-    const value = e.target.value
-    let results = [];
+    const { value } = e.target
+    const results = []
 
     if (value.length > 3) {
-      topNews.map((item, i) => {
+      topNews.map(item => {
         if (item.description && item.description.indexOf(value) !== -1) {
           results.push(item)
         }
@@ -29,13 +29,11 @@ const Search = () => {
       })
     }
 
-    console.log(results)
     setSearchResults(results)
 
     setTimeout(() => {
       setLoading(false)
-    }, 300);
-
+    }, 300)
   }
 
   const articlePreviewHandler = (e, article) => {
@@ -49,52 +47,48 @@ const Search = () => {
     setArticleForPreview(null)
   }
 
-  const NotFoundTemplate = () => {
-    return (
-      <>
-        <h1 className="page-title">Page not found</h1>
-        <p>If you entered a web address please check it was correct.</p>
-      </>
-    )
-  }
+  const NotFoundTemplate = () => (
+    <>
+      <h1 className="page-title">Page not found</h1>
+      <p>If you entered a web address please check it was correct.</p>
+    </>
+  )
 
   return (
     <>
-      {
-        articleForPreview
-        && <Article
-          article={articleForPreview}
-          backFromPreview={backFromArticlePreview}
-          backFromPreviewText={`Back to search`}
-        />
-      }
+      {articleForPreview
+        && (
+          <Article
+            article={articleForPreview}
+            backFromPreview={backFromArticlePreview}
+            backFromPreviewText="Back to search"
+          />
+        )}
 
       <ContentWrapepr>
-        {
-          !articleForPreview ?
+        {!articleForPreview
+          && (
             <div className="mb-5">
               <h1 className="page-title text-center">{`Search top news from ${activeCountry.name}`}</h1>
               <input id="searchInput" className="d-block m-auto searchInput" type="text" onChange={searchHandler} />
             </div>
-            : ''
-        }
+          )}
 
         {loading && <Loader />}
         {!loading && !searchResults && <NotFoundTemplate />}
-        {
-          !loading
+        {!loading
           && !articleForPreview
           && searchResults
-          && <>
+          && (
             <ArticlesList
               articles={searchResults}
               articlePreviewHandler={articlePreviewHandler}
-              backFromArticlePreview={backFromArticlePreview} />
-          </>
-        }
+              backFromArticlePreview={backFromArticlePreview}
+            />
+          )}
       </ContentWrapepr>
     </>
   )
 }
 
-export default Search;
+export default Search

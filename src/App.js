@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Route } from 'react-router-dom'
 
 import MainLayout from './components/Layouts/MainLayout'
@@ -14,21 +14,19 @@ import { NewsByCategoryContextProvider } from './contexts/NewsByCategoryContext'
 
 function App() {
   return (
-    <React.Fragment>
-      <CountryContextProvider>
-        <TopNewsContextProvider>
-          <NewsByCategoryContextProvider>
-            <MainLayout>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/categories" component={Categories} />
-              <Route path="/category" component={Category} />
-              <Route exact path="/search" component={Search} />
-            </MainLayout>
-          </NewsByCategoryContextProvider>
-        </TopNewsContextProvider>
-      </CountryContextProvider>
-    </React.Fragment>
-  );
+    <CountryContextProvider>
+      <TopNewsContextProvider>
+        <NewsByCategoryContextProvider>
+          <MainLayout>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/categories" component={Categories} />
+            <Route path="/category" component={Category} />
+            <Route exact path="/search" component={Search} />
+          </MainLayout>
+        </NewsByCategoryContextProvider>
+      </TopNewsContextProvider>
+    </CountryContextProvider>
+  )
 }
 
-export default App;
+export default App

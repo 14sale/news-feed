@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 import TopNews from '../components/TopNews/TopNews'
 
-const Home = () => {
-  return (
-    <TopNews />
-  )
-}
+const Home = () => (
+  <TopNews />
 
-export default Home;
+)
+
+export default Home

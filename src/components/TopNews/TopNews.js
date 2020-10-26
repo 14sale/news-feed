@@ -11,7 +11,12 @@ import { TopNewsContext } from '../../contexts/TopNewsContext'
 
 function TopNews() {
   const { activeCountry, setSelectorDisabled } = useContext(CountryContext)
-  const { loading, topNews, articleForPreview, setArticleForPreview } = useContext(TopNewsContext)
+  const {
+    loading,
+    topNews,
+    articleForPreview,
+    setArticleForPreview,
+  } = useContext(TopNewsContext)
 
   const articlePreviewHandler = (e, article) => {
     e.preventDefault()
@@ -25,49 +30,65 @@ function TopNews() {
   }
 
   const newsCards = topNews && topNews.map((article, index) => {
-    let toReturn = '';
+    let toReturn = ''
 
     if (
       article.title
       && article.urlToImage
       && article.description
     ) {
-      toReturn = <NewsCard
-        key={index}
-        article={article}
-        articlePreview={articlePreviewHandler} />
+      toReturn = (
+        <NewsCard
+          key={index}
+          article={article}
+          articlePreview={articlePreviewHandler}
+        />
+      )
     }
 
-    return toReturn;
+    return toReturn
   })
 
-  useEffect(() => {
-    return () => {
-      articleForPreview && backFromArticlePreview()
-    };
+  useEffect(() => () => {
+    articleForPreview && backFromArticlePreview()
   })
 
   return (
     <section>
       {
         articleForPreview
-        && <Article
+        && (
+        <Article
           article={articleForPreview}
           backFromPreview={backFromArticlePreview}
           backFromPreviewText="Back to top news"
         />
+        )
       }
 
       {
         !articleForPreview
-        && <ContentWrapepr>
+        && (
+        <ContentWrapepr>
           <h1 className="page-title">Top news from {activeCountry.name}</h1>
-          {!loading && !newsCards && <p>The service is currently unable to load news, please try again later.</p>}
-          {loading && <div className={styles.loaderWrapper}> <Loader /> </div>}
-          <div className={styles.wrapper} >
+
+          {
+            !loading
+            && !newsCards
+            && <p>The service is currently unable to load news, please try again later.</p>
+          }
+
+          {
+            loading
+            && <div className={styles.loaderWrapper}> <Loader /> </div>
+          }
+
+          <div className={styles.wrapper}>
             {!loading && newsCards}
           </div>
+
         </ContentWrapepr>
+        )
       }
     </section>
   )

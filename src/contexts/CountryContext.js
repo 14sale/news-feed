@@ -2,18 +2,18 @@ import React, { createContext, useState } from 'react'
 
 const CountryContext = createContext()
 
-const CountryContextProvider = props => {
+const CountryContextProvider = ({ children }) => {
   const [countries, setCountries] = useState([
     {
       name: 'United States',
       shortName: 'US',
-      code: 'us'
+      code: 'us',
     },
     {
       name: 'Great Britain',
       shortName: 'GB',
-      code: 'gb'
-    }
+      code: 'gb',
+    },
   ])
 
   const [activeCountry, setActiveCountry] = useState(countries[0])
@@ -27,10 +27,10 @@ const CountryContextProvider = props => {
         activeCountry,
         setActiveCountry,
         selectorDisabled,
-        setSelectorDisabled
+        setSelectorDisabled,
       }}
     >
-      {props.children}
+      {children}
     </CountryContext.Provider>
   )
 }

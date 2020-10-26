@@ -3,30 +3,30 @@ import { CountryContext } from './CountryContext'
 import { apiKey, apiHost } from '../utils/NewsApiOrg'
 
 const NewsByCategoryContext = React.createContext()
-const NewsByCategoryContextProvider = props => {
+const NewsByCategoryContextProvider = ({ children }) => {
   const { activeCountry } = useContext(CountryContext)
   const [categories, setCategories] = useState([
     {
       name: 'Business',
-      code: 'business'
+      code: 'business',
     }, {
       name: 'Entertainment',
-      code: 'entertainment'
+      code: 'entertainment',
     }, {
       name: 'General',
-      code: 'general'
+      code: 'general',
     }, {
       name: 'Health',
-      code: 'health'
+      code: 'health',
     }, {
       name: 'Science',
-      code: 'science'
+      code: 'science',
     }, {
       name: 'Sports',
-      code: 'sports'
+      code: 'sports',
     }, {
       name: 'Technology',
-      code: 'technology'
+      code: 'technology',
     },
   ])
   const [loading, setLoading] = useState(true)
@@ -35,19 +35,15 @@ const NewsByCategoryContextProvider = props => {
 
   useEffect(() => {
     setLoading(true)
-    const fetchNews = async () => {
-      return Promise.all(categories.map(async category => {
-        return new Promise(resolve => {
-          const url = `${apiHost}top-headlines?country=${activeCountry.code}&category=${category.code}&apiKey=${apiKey}&pageSize=9`
-          fetch(url)
-            .then(newsRaw => newsRaw.json())
-            .then(news => resolve({ ...category, 'articles': news.articles }))
-            .catch(error => {
-              console.log(error);
-            });
-        })
-      }))
-    }
+    const fetchNews = async () => Promise.all(
+      categories.map(async category => new Promise(resolve => {
+        const url = `${apiHost}top-headlines?country=${activeCountry.code}&category=${category.code}&apiKey=${apiKey}&pageSize=9`
+        fetch(url)
+          .then(newsRaw => newsRaw.json())
+          .then(news => resolve({ ...category, articles: news.articles }))
+          .catch(error => { throw new Error(error) })
+      })),
+    )
 
     const dataFromLocalStorage = JSON.parse(localStorage.getItem(`newsByCategory-${activeCountry.code}`))
     if (dataFromLocalStorage) {
@@ -56,11 +52,10 @@ const NewsByCategoryContextProvider = props => {
     } else {
       fetchNews().then(news => {
         setNewsByCategory(news)
-        localStorage.setItem(`newsByCategory-${activeCountry.code}`, JSON.stringify(news));
+        localStorage.setItem(`newsByCategory-${activeCountry.code}`, JSON.stringify(news))
         setLoading(false)
       })
     }
-
   }, [activeCountry, categories])
 
   return (
@@ -71,9 +66,10 @@ const NewsByCategoryContextProvider = props => {
       articleForPreview,
       setArticleForPreview,
       categories,
-      setCategories
-    }}>
-      {props.children}
+      setCategories,
+    }}
+    >
+      {children}
     </NewsByCategoryContext.Provider>
   )
 }
