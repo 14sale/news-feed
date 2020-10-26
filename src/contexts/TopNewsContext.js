@@ -32,7 +32,7 @@ const TopNewsContextProvider = props => {
     } else {
       fetchNews().then(news => {
         setTopNews(news)
-        localStorage.setItem(`topNews-${activeCountry.code}`, JSON.stringify(news));
+        news && localStorage.setItem(`topNews-${activeCountry.code}`, JSON.stringify(news));
         setLoading(false)
       })
     }
