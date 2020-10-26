@@ -2,18 +2,14 @@ import React from 'react'
 import Styles from './Footer.module.css'
 import ContentWrapper from '../Wrappers/ContentWrapper'
 
-const Footer = (props) => {
-  return (
-    <React.Fragment>
-      <section className={props.className}>
-        <ContentWrapper>
-          <div className={Styles.content}>
-            {props.children}
-          </div>
-        </ContentWrapper>
-      </section>
-    </React.Fragment>
-  )
-}
+const Footer = () => (
+  <footer className="main-footer">
+    <ContentWrapper>
+      <div className={Styles.content}>
+        <p>NewsFeed.com</p>
+      </div>
+    </ContentWrapper>
+  </footer>
+)
 
-export default Footer;
+export default Footer

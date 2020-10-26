@@ -3,21 +3,18 @@ import Styles from './MainLayout.module.css'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 
-const MainLayout = props => {
-  return (
-    <React.Fragment>
-      <div className={Styles.mainLayout}>
-        <div className={Styles.mainWrapper}>
-          <section className={Styles.contentLayout}>
-            <Header />
-            {props.children}
-          </section>
-
-          <Footer className={Styles.footer}>NewsFeed.com</Footer>
-        </div>
+const MainLayout = ({ children }) => (
+  <>
+    <div className={Styles.mainLayout}>
+      <div className={Styles.mainWrapper}>
+        <section className={Styles.contentLayout}>
+          <Header />
+          {children}
+        </section>
+        <Footer />
       </div>
-    </React.Fragment>
-  )
-}
+    </div>
+  </>
+)
 
-export default MainLayout;
+export default MainLayout

@@ -103,3 +103,9 @@ h4 {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
+
+.main-footer {
+  flex-shrink: 0;
+  background-color: #e6e6e6;
+  margin-top: 50px;
+}
