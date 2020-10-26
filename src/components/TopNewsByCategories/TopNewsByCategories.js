@@ -36,14 +36,15 @@ const TopNewsByCategories = () => {
   }
 
   const sliders = !loading && newsByCategory && newsByCategory.map((category, index) => {
-    const newsCards = category.articles.slice(0, 5).map((article, i) => {
+    const newsCards = category && category.articles && category.articles.slice(0, 5).map((article, i) => {
       return <NewsCard key={i} article={article} articlePreview={articlePreviewHandler} />
     });
 
     return (
       <section className={styles.categoryNewsSection} key={index}>
         <h3>Top 5 <Link to={`/category/${category.code}`}>{category.name}</Link> news</h3>
-        <Slider {...sliderSettings}> {newsCards} </Slider>
+        {!loading && !newsCards && <p>The service is currently unable to load {category.code} news, please try again later.</p>}
+        {!loading && newsCards && <Slider {...sliderSettings}> {newsCards} </Slider>}
       </section>
     )
 
